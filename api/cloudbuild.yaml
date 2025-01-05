@@ -1,0 +1,7 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api']
+images:
+  - 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api'
