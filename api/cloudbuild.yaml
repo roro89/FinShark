@@ -5,4 +5,4 @@ steps:
     args: ['push', 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api']
 images:
   - 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api:$COMMIT_SHA'
-  cloudlogging: true
+cloudlogging: true
