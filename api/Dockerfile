@@ -4,11 +4,11 @@ WORKDIR /app
 
 # Copy csproj and restore as distinct layers
 COPY *.sln .
-COPY api/*.csproj ./api/
+COPY *.csproj ./api/
 RUN dotnet restore ./api/api.csproj
 
 # Copy everything else and build
-COPY api/. ./api/
+COPY . ./api/
 WORKDIR /app/api
 RUN dotnet publish -c Release -o out
 
