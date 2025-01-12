@@ -3,7 +3,6 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
-#COPY *.sln .
 COPY *.csproj ./api/
 RUN dotnet restore ./api/api.csproj
 
@@ -16,9 +15,6 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/api/out ./
-
-# Copy the certificate
-COPY https/aspnetapp.pfx /https/aspnetapp.pfx
 
 # Expose port 80
 EXPOSE 80
