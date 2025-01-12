@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
-COPY *.sln .
+#COPY *.sln .
 COPY *.csproj ./api/
 RUN dotnet restore ./api/api.csproj
 
