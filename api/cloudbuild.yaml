@@ -1,17 +1,17 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA', 'api']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api']
+    args: ['push', 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'finshark-api', 
-           '--image', 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api:$COMMIT_SHA',
+           '--image', 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA',
            '--platform', 'managed',
            '--region', 'europe-central2',
            '--allow-unauthenticated',
            '--set-env-vars', 
            'ASPNETCORE_ENVIRONMENT=Development,PORT=8080']    
 images:
-  - 'europe-central2-docker.pkg.dev/dev-finshark/finshark-api:$COMMIT_SHA'
+  - 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY

@@ -17,7 +17,7 @@ WORKDIR /app
 COPY --from=build /app/api/out ./
 
 # Copy the certificate
-COPY ./https/aspnetapp.pfx /app/https/aspnetapp.pfx
+COPY ../https/aspnetapp.pfx /app/https/aspnetapp.pfx
 
 # Expose port 80
 EXPOSE 80
