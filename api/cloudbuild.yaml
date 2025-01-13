@@ -2,7 +2,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA', 'api']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api']
+    args: ['push', 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'finshark-api', 
            '--image', 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA',
