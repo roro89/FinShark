@@ -10,7 +10,7 @@ steps:
            '--region', 'europe-central2',
            '--allow-unauthenticated',
            '--set-env-vars', 
-           'ASPNETCORE_ENVIRONMENT=Development,PORT=8080']    
+           'ASPNETCORE_ENVIRONMENT=Development']    
 images:
   - 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA'
 options:
