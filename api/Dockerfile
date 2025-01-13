@@ -8,7 +8,6 @@ RUN dotnet restore ./api/api.csproj
 
 # Copy everything else and build
 COPY . ./api/
-COPY ./https/ ./app/https/
 WORKDIR /app/api
 RUN dotnet publish -c Release -o out
 
@@ -16,6 +15,9 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/api/out ./
+
+# Copy the certificate
+COPY ./https/aspnetapp.pfx /app/https/aspnetapp.pfx
 
 # Expose port 80
 EXPOSE 80
