@@ -11,6 +11,9 @@ steps:
            '--allow-unauthenticated',
            '--set-env-vars', 
            'ASPNETCORE_ENVIRONMENT=Development']    
+  - name: 'mcr.microsoft.com/dotnet/sdk:8.0'
+    entrypoint: 'dotnet'
+    args: ['ef', 'database', 'update']
 images:
   - 'europe-central2-docker.pkg.dev/dev-finshark/finshark/finshark-api:$COMMIT_SHA'
 options:
