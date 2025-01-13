@@ -8,6 +8,7 @@ RUN dotnet restore ./api/api.csproj
 
 # Copy everything else and build
 COPY . ./api/
+COPY ./https/ ./app/https/
 WORKDIR /app/api
 RUN dotnet publish -c Release -o out
 
