@@ -4,7 +4,7 @@ import { UserProfileToken } from "../Models/User";
 import { CommentGet, CommentPost } from "../Models/Comment";
 import { PortfolioGet, PortfolioPost } from "../Models/Portfolio";
 
-const api = "https://localhost/api/portfolio/";
+const api = "https://localhost:5443/api/portfolio/";
 
 export const portfolioAddAPI = async (symbol: string) => {
     try{
