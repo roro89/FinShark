@@ -9,6 +9,7 @@
 *.sln.docstates
 .vs/
 *.VC.db
+.vscode/
 
 # Build results
 [Aa]rtifacts/
@@ -244,3 +245,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Ignore docker-compose for local development environment
+/docker-compose.yml
