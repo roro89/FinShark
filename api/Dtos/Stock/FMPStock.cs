@@ -34,7 +34,7 @@ namespace api.Dtos.Stock
         public string city { get; set; }
         public string state { get; set; }
         public string zip { get; set; }
-        public double dcfDiff { get; set; }
+        public double? dcfDiff { get; set; }
         public double dcf { get; set; }
         public string image { get; set; }
         public string ipoDate { get; set; }

@@ -30,6 +30,7 @@ namespace api.Controllers
         {
             try
             {
+                Console.WriteLine("Registering user");
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
@@ -38,11 +39,13 @@ namespace api.Controllers
                     UserName = registerDto.Username,
                     Email = registerDto.Email,
                 };
-
+                Console.WriteLine("Creating user");
                 var createdUser = await _userManager.CreateAsync(appUser, registerDto.Password);
 
+                Console.WriteLine("Checking if user created");
                 if (createdUser.Succeeded)
                 {
+                    Console.WriteLine("Adding user to role");
                     var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
                     if (roleResult.Succeeded)
                     {
@@ -65,6 +68,7 @@ namespace api.Controllers
             }
             catch(Exception e)
             {
+                Console.WriteLine(e);
                 return StatusCode(500, e);
             }
         }
