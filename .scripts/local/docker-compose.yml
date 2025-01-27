@@ -1,0 +1,68 @@
+version: '3.4'
+
+services:
+  finshark-api:
+    image: finshark-api:dev
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    develop:
+      watch:
+        - action: rebuild
+          path: ./api      
+    ports:
+      - "5080:80"
+      - "5443:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./api:/api
+      - ~/.nuget/packages:/root/.nuget/packages
+    depends_on:
+      - db
+  finshark-web:
+    image: finshark-web:dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend      
+    ports:
+      - "8080:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/frontend
+    depends_on:
+      - finshark-api
+  db:
+    image: postgres
+    restart: always
+    user: postgres
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=finshark-db
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  migrate:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.migrations
+    depends_on:
+      - db      
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: .local/password.txt
