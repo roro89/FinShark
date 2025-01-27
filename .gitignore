@@ -9,6 +9,7 @@
 *.sln.docstates
 .vs/
 *.VC.db
+.vscode/
 
 # Build results
 [Aa]rtifacts/
